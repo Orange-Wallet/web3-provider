@@ -25,8 +25,8 @@ class BaseProvider extends EventEmitter {
       object: data,
       network: this.providerNetwork,
     };
-    if (window.trustwallet.postMessage) {
-      window.trustwallet.postMessage(object);
+    if (window.flutter_inappwebview.callHandler) {
+      window.flutter_inappwebview.callHandler("OrangeHandler", object);
     } else {
       console.error("postMessage is not available");
     }
