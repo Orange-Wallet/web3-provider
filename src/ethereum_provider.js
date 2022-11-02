@@ -46,13 +46,25 @@ class TrustWeb3Provider extends BaseProvider {
   }
 
   setConfig(config) {
+    console.log("config", config);
     this.setAddress(config.ethereum.address);
 
     this.networkVersion = "" + config.ethereum.chainId;
     this.chainId = "0x" + (config.ethereum.chainId || 1).toString(16);
     this.rpc = new RPCServer(config.ethereum.rpcUrl);
     this.isDebug = !!config.isDebug;
+    console.log("config rpc", this.rpc);
+
   }
+
+  setNetwork(config) {
+    this.networkVersion = "" + config.ethereum.chainId;
+    this.chainId = "0x" + (config.ethereum.chainId || 1).toString(16);
+    this.rpc = new RPCServer(config.ethereum.rpcUrl);
+    console.log("config rpc", this.chainId);
+    this.emitChainChanged(this.chainId);
+  }
+
 
   request(payload) {
     // this points to window in methods like web3.eth.getAccounts()
