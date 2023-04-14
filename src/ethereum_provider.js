@@ -21,7 +21,6 @@ class TrustWeb3Provider extends BaseProvider {
 
     this.providerNetwork = "ethereum";
     this.idMapping = new IdMapping();
-    this.callbacks = new Map();
     this.wrapResults = new Map();
     this.isMetaMask = !!config.ethereum.isMetaMask;
 
@@ -54,6 +53,11 @@ class TrustWeb3Provider extends BaseProvider {
     this.rpc = new RPCServer(config.ethereum.rpcUrl);
     this.isDebug = !!config.isDebug;
     console.log("config rpc", this.rpc);
+    if (config.ethereum.callbacks != undefined) {
+      this.callbacks = config.ethereum.callbacks;
+    } else {
+      this.callbacks = new Map();
+    }
 
   }
 
